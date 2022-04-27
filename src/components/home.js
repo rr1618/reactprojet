@@ -5,7 +5,7 @@ import axios from "axios";
 import { Chart } from "react-google-charts";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-
+import API from "./API";
 
 // Home component contains the components which are to be displayed on the home screen
 const Home = () =>{
@@ -34,12 +34,21 @@ const Home = () =>{
         setSearch(true)
         if (!isNaN(data))
         //    api call to fetch the policies
-        axios.get(`http://127.0.0.1:8000/medi/policysearch/?search=policy&id=${data}`).then((res)=>{
-            setPolicies(res.data)
-        }).catch((err)=>{
-            console.log(err)
-            setPolicies(null)
-        })
+            API.fetch_policy(data)
+                .then((res)=>{
+                    setPolicies(res.data)
+                })
+                .catch((err)=>{
+                    console.log(err)
+                    setPolicies(null)
+                })
+
+        // axios.get(`http://127.0.0.1:8000/medi/policysearch/?search=policy&id=${data}`).then((res)=>{
+        //     setPolicies(res.data)
+        // }).catch((err)=>{
+        //     console.log(err)
+        //     setPolicies(null)
+        // })
     }
 
     return(
