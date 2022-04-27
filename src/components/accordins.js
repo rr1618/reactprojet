@@ -8,9 +8,10 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Grid from '@mui/material/Grid';
 import {useState} from "react";
 import {Button, Container} from "@mui/material";
-import axios from "axios";
 import Typography from "@mui/material/Typography";
 import API from "./API";
+
+
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={5} square {...props} />
 ))(({ theme }) => ({
@@ -69,7 +70,6 @@ export default function CustomizedAccordions(props) {
     //Function which handles how the policies have to updated when the user clicks edit and submit
     const handleSubmit =(event)=>{
         event.preventDefault()
-        console.log(cust)
         //Api call to first update the changes the made to customer object
         API.update_customer(cust,cust.customer_id)
             .then(()=>{
@@ -92,34 +92,6 @@ export default function CustomizedAccordions(props) {
                 alert("Not updated")
                 props.search(props.data)
             })
-        // axios.put(`http://127.0.0.1:8000/medi/customer/${cust.customer_id}`,
-        //
-        //     {cust})
-        //     .then((res)=>{
-        //                     //nested api call to update policy details
-        //                     axios.put(`http://127.0.0.1:8000/medi/policy/${policy.policy_id}`,
-        //                 {policy,"segment":vehicle.vehicle_segment,"fuel":vehicle.fuel
-        //             })
-        //                         .then(()=>{
-        //                             //Disabling the Edit option when API call is successful
-        //                             setEdit(true)
-        //                             alert('Updated')
-        //
-        //             }).catch((err)=>{
-        //                 console.log(err)
-        //                 // setEdit(true)
-        //                         setError(true)
-        //                 alert('Premium should be Less than 1 million')
-        //             })
-        //
-        // }).catch((err)=>{
-        //     console.log(err)
-        //     // setEdit(true)
-        //     setError(true)
-        //     alert("Not updated")
-        //     props.search(props.data)
-        //     // props.getData(policy.policy_id)
-        // })
 
     }
 
@@ -324,13 +296,9 @@ export default function CustomizedAccordions(props) {
                     </form>
                 </AccordionDetails>
             </Accordion>:
-                <Grid container xs={12} height={'20vw'}  alignItems="center" justifyContent="center">
-                    <Grid item xs={4} spacing={5}>
-                        <Typography variant="h4" component="div" gutterBottom>
+                        <p style={{textAlign:'center'}}>
                             Please Make a search
-                        </Typography>
-                    </Grid>
-                </Grid>
+                        </p>
                 }
         </div>
     );
