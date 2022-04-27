@@ -41,6 +41,21 @@ input,select{
 }
 
 
+@media (max-width: 480px) {
+  input,select{
+    margin: 5px;
+    background-color: lightblue;
+    border-radius: 5px;
+    width: 45vw;
+  }
+  label{
+    /*margin: 5px;*/
+    margin-bottom: 10px;
+    padding: 5px;
+
+
+  }
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

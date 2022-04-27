@@ -265,12 +265,12 @@ export default function CustomizedAccordions(props) {
                                     </Grid>
                                 </Grid>
                                 <Grid item container xs={12} lg={6}>
-                                    <Grid item container xs={12}>
-                                        <Grid item xs={6}>
+                                    <Grid item container xs={12} >
+                                        <Grid item xs={8} md={6}>
                                             <label htmlFor="bil"> Body Injury Liability</label>
                                         </Grid>
-                                        <Grid item xs={6}>
-                                            <input type="checkbox" id={'bil'} checked={policy.bil} placeholder={'bil'} onChange={(e) => {
+                                        <Grid item xs={1} md={6} >
+                                            <input  type="checkbox" id={'bil'} checked={policy.bil} placeholder={'bil'} onChange={(e) => {
                                                 console.log(e.target.value)
                                                 setPolicy({
                                                     ...policy, bil: !policy.bil
@@ -279,10 +279,10 @@ export default function CustomizedAccordions(props) {
                                         </Grid>
                                     </Grid>
                                     <Grid item container xs={12}>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={8} md={6}>
                                             <label htmlFor="pdl"> Property Damage Liability</label>
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={1} md={6}>
                                             <input type="checkbox" id={'pdl'} checked={policy.pdl} placeholder={'bil'} onClick={(e) => {
                                                 setPolicy({
                                                     ...policy, pdl: !policy.pdl
@@ -291,10 +291,10 @@ export default function CustomizedAccordions(props) {
                                         </Grid>
                                     </Grid>
                                     <Grid item container xs={12}>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={8} md={6}>
                                             <label htmlFor="pip"> Personal injury protection</label>
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={1} md={6}>
                                             <input type="checkbox" id={'pip'} checked={policy.pip} placeholder={'bil'} onChange={(e) => {
                                                 setPolicy({
                                                     ...policy, pip: !policy.pip
@@ -303,10 +303,10 @@ export default function CustomizedAccordions(props) {
                                         </Grid>
                                     </Grid>
                                     <Grid item container xs={12}>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={8} md={6}>
                                             <label htmlFor="collision"> Collision</label>
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={1} md={6}>
                                             <input type="checkbox" id={'collision'} checked={policy.collision} placeholder={'bil'}
                                                    onChange={(e) => {
                                                        setPolicy({
@@ -316,10 +316,10 @@ export default function CustomizedAccordions(props) {
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12} container>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={8} md={6}>
                                             <label htmlFor="'comprehensive'"> Comprehensive</label>
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={1} md={6}>
                                             <input type="checkbox" id={'comprehensive'} checked={policy.comprehensive} placeholder={'bil'}
                                                    onChange={(e) => {
                                                        setPolicy({
@@ -329,10 +329,10 @@ export default function CustomizedAccordions(props) {
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={12} container>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={8} md={6}>
                                             <label htmlFor="'comprehensive'"> Customer Marital Status</label>
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={1} md={6}>
                                             <input type="checkbox" id={'comprehensive'} checked={cust.customer_marital_status} placeholder={'bil'}
                                                    onChange={(e) => {
                                                        setCust({

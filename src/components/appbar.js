@@ -43,9 +43,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
+            width: '20ch',
+            '&:focus': {
+                width: '25ch',
+            },
+        },
+        [theme.breakpoints.up('md')]: {
             width: '30ch',
             '&:focus': {
-                width: '80ch',
+                width: '60ch',
             },
         },
     },
@@ -66,7 +72,7 @@ export default function SearchAppBar(props) {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                        sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' } }}
                     >
                         {props.heading}
                     </Typography>
