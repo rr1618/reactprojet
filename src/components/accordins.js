@@ -109,7 +109,7 @@ export default function CustomizedAccordions(props) {
                     console.log(err)
                     // setEdit(true)
                     handleClose()
-                    setError('Premium should be Less than 1 million')
+                    setError('Please Fill the Fields Properly and Try re-submitting')
                     handleClickOpenAlert()
 
                     // alert()
@@ -119,6 +119,7 @@ export default function CustomizedAccordions(props) {
                 console.log(err)
                 handleClose()
                 handleClickOpenAlert()
+                setError('Please Fill the Fields Properly and Try re-submitting')
 
                 props.search(props.data)
             })
