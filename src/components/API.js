@@ -1,7 +1,7 @@
 import axios from "axios"
 
-// const base = "https://mediassist.herokuapp.com/"
-const base = "http://127.0.0.1:8000/"
+const base = "https://mediassist.herokuapp.com/"
+// const base = "http://127.0.0.1:8000/"
 
 export default class API{
     static async update_customer(cust,cust_id){
