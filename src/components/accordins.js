@@ -83,9 +83,9 @@ export default function CustomizedAccordions(props) {
     const handleClose = () => {
         setOpen(false);
     };
-    const handleToggle = () => {
-        setOpen(!open);
-    };
+    // const handleToggle = () => {
+    //
+    // };
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
@@ -93,6 +93,7 @@ export default function CustomizedAccordions(props) {
     //Function which handles how the policies have to updated when the user clicks edit and submit
     const handleSubmit =(event)=>{
         event.preventDefault()
+        setOpen(!open);
         //Api call to first update the changes the made to customer object
         API.update_customer(cust,cust.customer_id)
             .then(()=>{
@@ -147,12 +148,10 @@ export default function CustomizedAccordions(props) {
                     >
                         <CircularProgress color="inherit" />
                     </Backdrop>
-                    <div>
+                    <div >
                         <Dialog
                             open={openAlert}
                             onClose={handleCloseAlert}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
                         >
                             <DialogTitle id="alert-dialog-title">
                                 {"MediAssist Bot"}
@@ -165,7 +164,7 @@ export default function CustomizedAccordions(props) {
                             <DialogActions>
                                 {/*<Button onClick={handleCloseAlert}>Disagree</Button>*/}
                                 <Button onClick={handleCloseAlert} autoFocus>
-                                    Agree
+                                    Ok
                                 </Button>
                             </DialogActions>
                         </Dialog>
@@ -347,7 +346,9 @@ export default function CustomizedAccordions(props) {
                                             {edit &&<Button variant="outlined" onClick={() => {
                                                 setEdit(false)
                                             }}>Edit</Button>}
-                                            {!edit && <Button variant="outlined" type={'submit'} onClick={()=>handleToggle()} value={'submit'}> Submit</Button>   }
+                                            {!edit && <Button variant="outlined" type={'submit'}
+                                                              // onClick={()=>handleToggle()}
+                                                              value={'submit'}> Submit</Button>   }
                                                 </Grid>
                                     </Grid>
                                 </Grid>
