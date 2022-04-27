@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
 import SearchAppBar from "./appbar";
 import CustomizedAccordions from "./accordins";
-import axios from "axios";
 import { Chart } from "react-google-charts";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import API from "./API";
 
 // Home component contains the components which are to be displayed on the home screen
@@ -17,9 +15,7 @@ const Home = () =>{
 
     const showChart =(region)=>{
         //Api call to get the data required for chart preparation
-
-        axios.get(`http://127.0.0.1:8000/medi/chart/${region}`).then((res)=>{
-
+        API.chart(region).then((res)=>{
             setPolicyCount(res.data)
             setChart(true)
         }).catch((err)=>{
@@ -84,12 +80,12 @@ const Home = () =>{
                         <Grid item xs={12}>
                             {chart&&<Chart
                                 chartType="ScatterChart"
-                                data={policyCount}
+                                data={policyCount['chart']}
                                 width="100%"
                                 height="250px"
                                 legendToggle
                                 options={ {
-                                    title: "Policies Per Month ------>",
+                                    title: `Policies Per Month ------>Total-Policies-${policyCount['count']}`,
                                     hAxis: {
                                         title: "Month---->",
                                         viewWindow: { min: 0, max: 12 }

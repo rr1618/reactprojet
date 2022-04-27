@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const base = "https://mediassist.herokuapp.com/"
-// const base = "http://127.0.0.1:8000/"
+// const base = "https://mediassist.herokuapp.com/"
+const base = "http://127.0.0.1:8000/"
 
 export default class API{
     static async update_customer(cust,cust_id){
@@ -18,6 +18,11 @@ export default class API{
         console.log(pol_id)
         return axios.create({baseURL:base})
             .get(`medi/policysearch/?search=policy&id=${pol_id}`)
+    }
+    static async chart(region){
+        console.log(region)
+        return axios.create({baseURL:base})
+            .get(`medi/chart/${region}`)
     }
 }
 

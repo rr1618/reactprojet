@@ -7,9 +7,16 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Grid from '@mui/material/Grid';
 import {useState} from "react";
+import Backdrop from '@mui/material/Backdrop';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import {Button, Container} from "@mui/material";
-import Typography from "@mui/material/Typography";
 import API from "./API";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 
 const Accordion = styled((props) => (
@@ -54,15 +61,31 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 // Customized Accordins
 
 export default function CustomizedAccordions(props) {
-
+    const [open, setOpen] = React.useState(false);
     const [expanded, setExpanded] = React.useState('panel1');
     const [policy, setPolicy] = useState(props.policy)
     const [cust, setCust] = useState(props.policy.customer_id)
     const [vehicle, setVehicle] = useState(props.policy.vehicle_segment_id)
     const [edit,setEdit] = useState(true);
-    const [error,setError] = useState(false)
+    const [error,setError] = useState('')
+    const [openAlert, setOpenAlert] = useState(false);
 
 
+    const handleClickOpenAlert = () => {
+        setOpenAlert(true);
+    };
+
+    const handleCloseAlert = () => {
+        setOpenAlert(false);
+
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleToggle = () => {
+        setOpen(!open);
+    };
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
@@ -76,20 +99,26 @@ export default function CustomizedAccordions(props) {
             API.update_policy(policy,policy.policy_id,vehicle.vehicle_segment,vehicle.fuel)
                 .then((res)=>{
                     setEdit(true)
-                    alert('Updated')
+                    handleClose()
+                    setError('Successfully updated the record')
+                    handleClickOpenAlert()
+
                 })
                 .catch((err)=>{
                     console.log(err)
                     // setEdit(true)
-                    setError(true)
-                    alert('Premium should be Less than 1 million')
+                    handleClose()
+                    setError('Premium should be Less than 1 million')
+                    handleClickOpenAlert()
+
+                    // alert()
                 })
         })
             .catch((err)=>{
                 console.log(err)
-                // setEdit(true)
-                setError(true)
-                alert("Not updated")
+                handleClose()
+                handleClickOpenAlert()
+
                 props.search(props.data)
             })
 
@@ -101,9 +130,9 @@ export default function CustomizedAccordions(props) {
             {/*logic to display proper message till the api has fetched the policies*/}
             {cust ? <Accordion expanded={expanded === props.ukey} onChange={handleChange(props.ukey)}>
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Grid container xs={12} spacing={5} justifyContent={'center'}>
+                    <Grid container xs={12}  justifyContent={'center'}>
                         <Grid item xs={4}>
-                            <p id={'policy-id'}>Policy ID : {props.policy.policy_id}    </p>
+                            <p id={'policy-id'}>Policy ID : {props.policy.policy_id} </p>
                         </Grid>
                         <Grid item xs={4}>
                             <p id={'customer-id'}>Customer Id : {policy.customer_id && policy.customer_id['customer_id']} </p>
@@ -111,6 +140,37 @@ export default function CustomizedAccordions(props) {
                     </Grid>
                 </AccordionSummary>
                 <AccordionDetails>
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={open}
+                        onClick={handleClose}
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                    <div>
+                        <Dialog
+                            open={openAlert}
+                            onClose={handleCloseAlert}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"MediAssist Bot"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    {error}
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                {/*<Button onClick={handleCloseAlert}>Disagree</Button>*/}
+                                <Button onClick={handleCloseAlert} autoFocus>
+                                    Agree
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
+
                     <p id={'date'}>
                         Date of Purchase : {policy.date_of_purchase}
                     </p>
@@ -287,7 +347,7 @@ export default function CustomizedAccordions(props) {
                                             {edit &&<Button variant="outlined" onClick={() => {
                                                 setEdit(false)
                                             }}>Edit</Button>}
-                                            {!edit && <Button variant="outlined" type={'submit'} value={'submit'}> Submit</Button>   }
+                                            {!edit && <Button variant="outlined" type={'submit'} onClick={()=>handleToggle()} value={'submit'}> Submit</Button>   }
                                                 </Grid>
                                     </Grid>
                                 </Grid>
